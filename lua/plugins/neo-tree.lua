@@ -1,10 +1,10 @@
 return {
-    "nvim-neo-tree/neo-tree.nvim",
-	branch = "v2.x",
-   	dependencies = {
+	"nvim-neo-tree/neo-tree.nvim",
+	branch = "v3.x",
+	dependencies = {
 		"nvim-lua/plenary.nvim",
+		"nvim-tree/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
-  		"nvim-tree/nvim-web-devicons",
 	},
 	opts = {
 		window = { 
@@ -17,5 +17,5 @@ return {
 	},
 	keys = {
         { "<C-n>", ":Neotree toggle<CR>", desc = "Neo-tree Toggle" },
-    },
+    }
 }
