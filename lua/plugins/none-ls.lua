@@ -19,7 +19,9 @@ return {
 
 			null_ls.setup({
 				sources = {
-					null_ls.builtins.formatting.clang_format,
+					null_ls.builtins.formatting.clang_format.with({
+						extra_args = { "-style={IndentWidth: 4}" },
+					}),
 					null_ls.builtins.formatting.stylua,
 				},
 

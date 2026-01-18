@@ -29,3 +29,13 @@ vim.diagnostic.config({
 	underline = true, -- Underline the specific warning text
 	severity_sort = true, -- Sort by severity (Errors first, then Warnings)
 })
+
+-- Unmap arrow keys on startup
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		vim.cmd("map <Up> <Nop>")
+		vim.cmd("map <Left> <Nop>")
+		vim.cmd("map <Right> <Nop>")
+		vim.cmd("map <Down> <Nop>")
+	end,
+})
