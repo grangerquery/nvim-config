@@ -11,8 +11,10 @@ vim.opt.winborder = "rounded"
 vim.g.mapleader = " "
 
 vim.diagnostic.config({
-	virtual_text = true, -- Show warnings at the end of the line
-	signs = true,  -- Show 'W' in the gutter
-	underline = true, -- Underline the specific warning text
-	severity_sort = true, -- Sort by severity (Errors first, then Warnings)
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
 })
+
