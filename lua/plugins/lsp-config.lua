@@ -1,4 +1,24 @@
+local lsp_servers = { "lua_ls", "clangd", "pyright", "ruby_lsp", "ts_ls" }
+
 return {
+	{
+		"neovim/nvim-lspconfig",
+		config = function()
+			vim.lsp.enable(lsp_servers)
+			vim.lsp.enable("racket_langserver")
+
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+			vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+			vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
+			vim.keymap.set("n", "gr", vim.lsp.buf.references)
+			vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+			vim.keymap.set("n", "K", vim.lsp.buf.hover)
+			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+			vim.keymap.set("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end)
+		end,
+	},
 	{
 		"williamboman/mason.nvim",
 		lazy = false,
@@ -11,33 +31,7 @@ return {
 		lazy = false,
 		opts = {
 			automatic_enable = true,
-			ensure_installed = { "lua_ls", "clangd", "vtsls", "jsonls" },
+			ensure_installed = lsp_servers,
 		},
-	},
-	{
-		"neovim/nvim-lspconfig",
-		config = function()
-			-- racket
-			vim.lsp.config("racket_langserver", {
-				cmd = { "racket", "-l", "racket-langserver" },
-				filetypes = { "racket", "scheme" },
-				root_markers = { ".git" },
-			})
-			vim.lsp.enable("racket_langserver")
-			-- C
-			vim.lsp.config("clangd", {
-				cmd = {
-					"clangd",
-					"--fallback-style={UseTab: Always, IndentWidth: 4, TabWidth: 4}",
-				},
-			})
-			vim.lsp.enable("clangd")
-			vim.lsp.enable("vtsls") -- javascript/typescript
-			vim.lsp.enable("jsonls") -- json
-			-- Keymaps
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP Definition" })
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP Hover" })
-			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
-		end,
 	},
 }
