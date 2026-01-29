@@ -6,6 +6,7 @@ return {
 			"nvimtools/none-ls-extras.nvim",
 			"jay-babu/mason-null-ls.nvim",
 			"williamboman/mason.nvim",
+			"gbprod/none-ls-shellcheck.nvim",
 		},
 		config = function()
 			local null_ls = require("null-ls")
@@ -13,7 +14,6 @@ return {
 
 			require("mason-null-ls").setup({
 				automatic_installation = true,
-				-- This automatically registers tools with none-ls
 				handlers = {},
 			})
 
@@ -23,6 +23,9 @@ return {
 						extra_args = { "-style={IndentWidth: 4}" },
 					}),
 					null_ls.builtins.formatting.stylua,
+					null_ls.builtins.formatting.shfmt,
+					require("none-ls-shellcheck.diagnostics"),
+					require("none-ls-shellcheck.code_actions"),
 				},
 
 				on_attach = function(client, bufnr)

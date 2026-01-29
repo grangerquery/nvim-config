@@ -4,11 +4,11 @@ return {
 		lazy = false,
 		name = "catppuccin",
 		priority = 1000,
-		config = function()
-			require("catppuccin").setup({
-				no_italic = true,
-			})
-
+		opts = {
+			no_italic = true,
+		},
+		config = function(_, opts)
+			require("catppuccin").setup(opts)
 			vim.cmd.colorscheme("catppuccin-mocha")
 		end,
 	},

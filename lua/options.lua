@@ -29,13 +29,16 @@ vim.diagnostic.config({
 	underline = true, -- Underline the specific warning text
 	severity_sort = true, -- Sort by severity (Errors first, then Warnings)
 })
-
--- Unmap arrow keys on startup
-vim.api.nvim_create_autocmd("VimEnter", {
-	callback = function()
-		vim.cmd("map <Up> <Nop>")
-		vim.cmd("map <Left> <Nop>")
-		vim.cmd("map <Right> <Nop>")
-		vim.cmd("map <Down> <Nop>")
-	end,
+-- Keybinds
+vim.keymap.set({ "n", "i" }, "<Up>", "<Nop>")
+vim.keymap.set({ "n", "i" }, "<Left>", "<Nop>")
+vim.keymap.set({ "n", "i" }, "<Down>", "<Nop>")
+vim.keymap.set({ "n", "i" }, "<Right>", "<Nop>")
+-- Racket stuff
+vim.filetype.add({
+	extension = {
+		rkt = "racket",
+		rktd = "racket",
+		rktl = "racket",
+	},
 })

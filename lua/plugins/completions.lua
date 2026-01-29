@@ -1,24 +1,33 @@
 return {
-	{
-		"hrsh7th/cmp-nvim-lsp",
-	},
+	-- autocompletion
+	{ "hrsh7th/cmp-nvim-lsp" },
+	-- snippets
 	{
 		"L3MON4D3/LuaSnip",
 		dependencies = {
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
 		},
+		config = function()
+			-- Load snippets from friendly-snippets
+			require("luasnip.loaders.from_vscode").lazy_load()
+		end,
 	},
+	-- completion
 	{
 		"hrsh7th/nvim-cmp",
-		config = function()
+		event = "InsertEnter",
+		dependencies = {
+			"L3MON4D3/LuaSnip",
+		},
+		opts = function()
 			local cmp = require("cmp")
-			require("luasnip.loaders.from_vscode").lazy_load()
+			local luasnip = require("luasnip")
 
-			cmp.setup({
+			return {
 				snippet = {
 					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
+						luasnip.lsp_expand(args.body)
 					end,
 				},
 				window = {
@@ -31,14 +40,24 @@ return {
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
+					-- 2026 Quality of Life: Tab-complete through snippets
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						elseif luasnip.expand_or_jumpable() then
+							luasnip.expand_or_jump()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" }, -- For luasnip users.
+					{ name = "luasnip" },
 				}, {
 					{ name = "buffer" },
 				}),
-			})
+			}
 		end,
 	},
 }

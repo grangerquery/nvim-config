@@ -12,7 +12,7 @@ return {
 			width = 19,
 			auto_expand_width = true,
 			mappings = {
-				["1"] = "open", -- This sets '1' to expand folders or open files
+				["<Tab>"] = "open",
 			},
 		},
 	},
