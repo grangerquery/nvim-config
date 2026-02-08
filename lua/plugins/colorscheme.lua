@@ -11,7 +11,14 @@ return {
 		},
 		config = function(_, opts)
 			require("catppuccin").setup(opts)
-			vim.cmd.colorscheme("catppuccin")
+			--vim.cmd.colorscheme("catppuccin")
 		end,
 	},
+	{
+		"bjarneo/pixel.nvim",
+		priority = 1000,
+		config = function()
+			vim.cmd.colorscheme("pixel")
+		end,
+	}
 }
