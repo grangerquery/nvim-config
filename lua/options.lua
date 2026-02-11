@@ -18,11 +18,13 @@ vim.diagnostic.config({
 	severity_sort = true,
 })
 
+local notify = vim.notify
+
 vim.notify = function(msg, level, opts)
-	if msg:match("mason") then
-		return
-	end
-	return require("notify")(msg, level, opts)
+    if msg:match("Mason") then
+        return
+    end
+    notify(msg, level, opts)
 end
 
 
