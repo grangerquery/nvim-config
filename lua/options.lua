@@ -4,7 +4,7 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.swapfile = false
 vim.opt.signcolumn = "yes"
 vim.opt.winborder = "rounded"
@@ -18,6 +18,14 @@ vim.diagnostic.config({
 	severity_sort = true,
 })
 
+vim.notify = function(msg, level, opts)
+	if msg:match("mason") then
+		return
+	end
+	return require("notify")(msg, level, opts)
+end
+
+
 vim.opt.sidescrolloff = 10
 vim.opt.scrolloff = 10
 
@@ -27,25 +35,25 @@ vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 
 local groups = {
-  "Normal",
-  "NormalNC",
-  "SignColumn",
-  "EndOfBuffer",
-  "LineNr",
-  "FoldColumn",
-  "VertSplit",
-  "StatusLine",
-  "StatusLineNC",
+	"Normal",
+	"NormalNC",
+	"SignColumn",
+	"EndOfBuffer",
+	"LineNr",
+	"FoldColumn",
+	"VertSplit",
+	"StatusLine",
+	"StatusLineNC",
 }
 
 for _, group in ipairs(groups) do
-  vim.api.nvim_set_hl(0, group, { bg = "NONE" })
+	vim.api.nvim_set_hl(0, group, { bg = "NONE" })
 end
 
 vim.api.nvim_create_autocmd("ColorScheme", {
-  callback = function()
-    for _, group in ipairs(groups) do
-      vim.api.nvim_set_hl(0, group, { bg = "NONE" })
-    end
-  end,
+	callback = function()
+		for _, group in ipairs(groups) do
+			vim.api.nvim_set_hl(0, group, { bg = "NONE" })
+		end
+	end,
 })
