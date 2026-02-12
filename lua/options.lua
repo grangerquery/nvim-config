@@ -8,6 +8,8 @@ vim.opt.wrap = false
 vim.opt.swapfile = false
 vim.opt.signcolumn = "yes"
 vim.opt.winborder = "rounded"
+vim.opt.sidescrolloff = 10
+vim.opt.scrolloff = 10
 vim.g.mapleader = " "
 
 vim.diagnostic.config({
@@ -21,15 +23,11 @@ vim.diagnostic.config({
 local notify = vim.notify
 
 vim.notify = function(msg, level, opts)
-    if msg:match("Mason") then
-        return
-    end
-    notify(msg, level, opts)
+	if msg:match("Mason") then
+		return
+	end
+	notify(msg, level, opts)
 end
-
-
-vim.opt.sidescrolloff = 10
-vim.opt.scrolloff = 10
 
 vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-j>', '<C-w>j')
