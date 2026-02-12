@@ -13,7 +13,6 @@ return {
 
 			require("mason-null-ls").setup({
 				automatic_installation = true,
-				-- This automatically registers tools with none-ls
 				handlers = {},
 			})
 
