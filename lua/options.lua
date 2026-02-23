@@ -10,6 +10,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.winborder = "rounded"
 vim.opt.sidescrolloff = 10
 vim.opt.scrolloff = 10
+vim.opt.clipboard = "unnamedplus"
 vim.g.mapleader = " "
 
 vim.diagnostic.config({
